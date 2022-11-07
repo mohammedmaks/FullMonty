@@ -1,15 +1,12 @@
 package fullmonty;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 
 import com.pushtechnology.diffusion.client.Diffusion;
 import com.pushtechnology.diffusion.client.features.Topics;
 import com.pushtechnology.diffusion.client.features.Topics.ValueStream;
-import com.pushtechnology.diffusion.client.features.control.topics.SubscriptionControl.SubscriptionByFilterResult;
-import com.pushtechnology.diffusion.client.features.control.topics.SubscriptionControl;
+
 import com.pushtechnology.diffusion.client.session.Session;
 import com.pushtechnology.diffusion.client.topics.details.TopicSpecification;
-import com.pushtechnology.diffusion.examples.ClientSimpleSubscriber;
 
 /**
  * 
@@ -25,17 +22,11 @@ public class FullMontySubscriber {
 	 * @param args
 	 */
 	
-	private static final Logger LOG =
-	        LoggerFactory.getLogger(ClientSimpleSubscriber.class);
-	
 	/*
-	 * public String subscribeToTiers(String tier) {
-	 * 
-	 * String result = ""; if (tier.equals("silver")) { result = tier; } else if
-	 * (tier.equals("gold")) { result = tier; }
-	 * 
-	 * return }
+	 * private static final Logger LOG =
+	 * LoggerFactory.getLogger(ClientSimpleSubscriber.class);
 	 */
+	
 	
 	public static void main(String[] args) throws InterruptedException {
 		// TODO Auto-generated method stub
@@ -63,7 +54,8 @@ public class FullMontySubscriber {
 	        @Override 
 	        public void onSubscription(String s, TopicSpecification topicSpecification) { 
 	        	System.out.println("Subscribe to" + s); 
-	        	LOG.info(s); }
+	        	//LOG.info(s); 
+	        	}
 	    }
 
 		topics.addStream("?.*//", String.class, new ValueStreamPrintLn());		

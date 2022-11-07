@@ -27,7 +27,7 @@ import com.pushtechnology.diffusion.client.features.control.topics.views.TopicVi
 import com.pushtechnology.diffusion.client.session.Session;
 import com.pushtechnology.diffusion.client.topics.details.TopicSpecification;
 import com.pushtechnology.diffusion.client.topics.details.TopicType;
-import com.pushtechnology.diffusion.examples.ClientSimpleSubscriber;
+//import com.pushtechnology.diffusion.examples.ClientSimpleSubscriber;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -52,7 +52,7 @@ import java.time.temporal.TemporalUnit;
  */
 public final class FullMonty {
 
-	private static final Logger LOG = LoggerFactory.getLogger(ClientSimpleSubscriber.class);
+	//private static final Logger LOG = LoggerFactory.getLogger(ClientSimpleSubscriber.class);
 
 	static String randomString() {
 
@@ -83,13 +83,14 @@ public final class FullMonty {
 		class FooStream extends ValueStream.Default<String> {
 			@Override
 			public void onValue(String topicPath, TopicSpecification specification, String oldValue, String newValue) {
-				LOG.info(newValue);
+				//LOG.info(newValue);
+				System.out.println("new value: "+newValue);
 			}
 
 			@Override
 			public void onSubscription(String s, TopicSpecification topicSpecification) {
 				System.out.println("Subscribe to" + s);
-				LOG.info(s);
+				//LOG.info(s);
 			}
 		}
 
@@ -120,38 +121,14 @@ public final class FullMonty {
 		final TopicUpdate topicUpdate =  session.feature(TopicUpdate.class);
 
 		topics.addStream("?.*//", String.class, new FooStream());
-		/*
-		 * topics.addStream("data/sink", String.class, new Topics.ValueStream<String>()
-		 * {
-		 * 
-		 * @Override public void onValue(String s, TopicSpecification
-		 * topicSpecification, String s2, String v1) { System.out.println(v1 +
-		 * "new value");
-		 * 
-		 * }
-		 * 
-		 * @Override public void onSubscription(String s, TopicSpecification
-		 * topicSpecification) { System.out.println("Subscribe to" + s); LOG.info(s); }
-		 * 
-		 * @Override public void onUnsubscription(String s, TopicSpecification
-		 * topicSpecification, Topics.UnsubscribeReason unsubscribeReason) {
-		 * 
-		 * }
-		 * 
-		 * @Override public void onClose() {
-		 * 
-		 * }
-		 * 
-		 * @Override public void onError(ErrorReason errorReason) {
-		 * System.out.println("Error" + errorReason); } });
-		 */
-
+		
 		// Create an int64 topic 'foo/counter'
 		// final CompletableFuture<TopicControl.AddTopicResult> future =
 		// topicControl.addTopic(
 		// "foo/counter",
 		// TopicType.INT64);
 		// full monty code testing
+		
 		// Creates 100 topics using the topic path data/sink/<#>, where <#> is a number
 		// from 1 to 100
 		for (long i = 1; i <= 100; i++) {
