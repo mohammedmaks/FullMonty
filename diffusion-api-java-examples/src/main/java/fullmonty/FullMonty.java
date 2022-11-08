@@ -165,25 +165,33 @@ public final class FullMonty {
 		// In a loop, every second, all 100 topics are to be updated with 5 times, with
 		// random strings of length 10.
 		// this loop will continue until 60 seconds have elapsed.
-		
+		int topicNumber = 0;
 		LocalTime before_timestamp = LocalTime.now();
-		for (int i = 0; i < 5; i++) {
-			for(int j = 0; j < 100; j++) {
-				String random_string = randomString();
-				topicUpdate.set(String.format("data/sink/%s",j),String.class, random_string);
-			}
-		}		
+		/*
+		 * for (int i = 0; i < 5; i++) { for(int j = 0; j < 100; j++) { String
+		 * random_string = randomString();
+		 * topicUpdate.set(String.format("data/sink/%s",j),String.class, random_string);
+		 * } }
+		 */		
+		for (int k = 0; k <500; k++) {
+			topicNumber = k %100;
+			
+			String random_string = randomString();
+			topicUpdate.set(String.format("data/sink/%s",topicNumber),String.class, random_string);
+		}
 		LocalTime finished_timestamp = LocalTime.now();
+				
+		long elapsed_time = (ChronoUnit.MILLIS.between(before_timestamp, finished_timestamp));
+	
+		long timeDiff = 60000 - elapsed_time;
 		
-//		long elapsed_time = before_timestamp.until(finished_timestamp, (TemporalUnit) ChronoUnit.SECONDS) ;
+		//if the loop hasnt been run for longer than 60 seconds, sleep till 60 seconds
 		
-		float elapsed_time = (ChronoUnit.MILLIS.between(before_timestamp, finished_timestamp));
-		elapsed_time = elapsed_time/1000;
+		if (elapsed_time < 60000) {
+			System.out.println("Sleeping for: " + timeDiff);
+			Thread.sleep(timeDiff);
+		}
 		
-		System.out.println("now listening " +elapsed_time);
-		//topics.subscribe("?data/sink/");
-		Thread.sleep(10000);
-
 		System.out.println("done");
 
 	}

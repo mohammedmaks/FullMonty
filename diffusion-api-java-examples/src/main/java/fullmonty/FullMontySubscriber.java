@@ -31,7 +31,12 @@ public class FullMontySubscriber {
 	public static void main(String[] args) throws InterruptedException {
 		// TODO Auto-generated method stub
 		
-		Session session = Diffusion.sessions().property("tier", "silver").principal("admin").password("password").open("ws://localhost:8080");
+		Session session = Diffusion
+				.sessions()
+				.property("tier", "silver")
+				.principal("admin")
+				.password("password")
+				.open("ws://localhost:8080");
 
 //		final SubscriptionControl subscriptionControl = session.feature(SubscriptionControl.class);
 //		final String filter = "tier is 'silver'";
@@ -53,7 +58,7 @@ public class FullMontySubscriber {
 	        
 	        @Override 
 	        public void onSubscription(String s, TopicSpecification topicSpecification) { 
-	        	System.out.println("Subscribe to" + s); 
+	        	System.out.println("Subscribe to " + s); 
 	        	//LOG.info(s); 
 	        	}
 	    }
